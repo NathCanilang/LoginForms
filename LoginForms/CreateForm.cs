@@ -6,13 +6,16 @@ using System.Windows.Forms;
 namespace LoginForms
 
 {
-    public partial class Form2 : Form
+    public partial class CreateForm : Form
     {
     public Dictionary<string, string> AccountsIdentity = new Dictionary<string, string>();
+        TableForm tableForm;    
+        
        
-        public Form2()
+        public CreateForm(TableForm TF)
         {
             InitializeComponent();
+            this.tableForm = TF;
         }
 
         private void Form2_Load(object sender, EventArgs e)
@@ -31,15 +34,7 @@ namespace LoginForms
             this.Close();
         }
 
-        private void roundedPanel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void Panel2_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
+        
 
         private void CreateBtn_Click(object sender, EventArgs e)
         {
@@ -50,6 +45,7 @@ namespace LoginForms
             else
             {
                 string hashedPassword = HashPassword(PasswordBox.Text);
+               
                 AccountsIdentity[UsernameBox.Text] = hashedPassword;
                 MessageBox.Show("Account Created", "Success!", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
@@ -66,6 +62,11 @@ namespace LoginForms
                 byte[] hashBytes = sha256.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
                 return Convert.ToBase64String(hashBytes);
             }
+        }
+
+        private void UsernameBox_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

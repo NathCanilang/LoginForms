@@ -1,6 +1,6 @@
 ﻿namespace LoginForms
 {
-    partial class Form2
+    partial class CreateForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form2));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CreateForm));
             this.UsernameBox = new System.Windows.Forms.TextBox();
             this.PasswordBox = new System.Windows.Forms.TextBox();
             this.Usernamelbl = new System.Windows.Forms.Label();
@@ -43,6 +43,7 @@
             this.UsernameBox.Name = "UsernameBox";
             this.UsernameBox.Size = new System.Drawing.Size(186, 22);
             this.UsernameBox.TabIndex = 0;
+            this.UsernameBox.TextChanged += new System.EventHandler(this.UsernameBox_TextChanged);
             // 
             // PasswordBox
             // 
@@ -89,7 +90,7 @@
             this.BackBtn.UseVisualStyleBackColor = true;
             this.BackBtn.Click += new System.EventHandler(this.BackBtn_Click_1);
             // 
-            // Form2
+            // CreateForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -101,7 +102,7 @@
             this.Controls.Add(this.PasswordBox);
             this.Controls.Add(this.UsernameBox);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "Form2";
+            this.Name = "CreateForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Profile";
             this.Load += new System.EventHandler(this.Form2_Load);

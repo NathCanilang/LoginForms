@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace LoginForms
 {
-    public partial class Form3 : Form
+    public partial class TableForm : Form
     {
-        public Form3()
+        public TableForm()
         {
             InitializeComponent();
         }
@@ -22,10 +22,7 @@ namespace LoginForms
             this.TopMost = true;
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
+        
 
         private void RejectBtn_Click(object sender, EventArgs e)
         {
@@ -35,6 +32,11 @@ namespace LoginForms
         private void BackBtn_Click(object sender, EventArgs e)
         {
             this.Hide();
+        }
+
+        private void ApporvalTable_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

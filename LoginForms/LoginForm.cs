@@ -21,8 +21,8 @@ namespace LoginForms
         string[] Password = { "admin123", "admin456" };
         Form loginForm = null;
 
-        Form2 form2 = new Form2();
-        Form3 form3 = new Form3();
+        CreateForm form2 = new CreateForm();
+        TableForm form3 = new TableForm();
 
         
         public LoginForm()
@@ -57,11 +57,11 @@ namespace LoginForms
                 {
                     if (i == 0)
                     {
-                        loginForm = new Form3(); 
+                        loginForm = new TableForm(); 
                     }
                     else if (i == 1)
                     {
-                        loginForm = new Form3(); 
+                        loginForm = new TableForm(); 
                     }
 
                     break;
