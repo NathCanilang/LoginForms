@@ -143,6 +143,26 @@ namespace LoginForms.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Moonbase_login2 {
+            get {
+                object obj = ResourceManager.GetObject("Moonbase login2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Moonbase_login3 {
+            get {
+                object obj = ResourceManager.GetObject("Moonbase login3", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap ShowPassword {
             get {
                 object obj = ResourceManager.GetObject("ShowPassword", resourceCulture);
