@@ -149,5 +149,10 @@ namespace LoginForms
                 return hashedPassword == hashedInputPassword;
             }
         }
+
+        private void BackgroundPanel_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }

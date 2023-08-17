@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace LoginForms
+namespace LoginForms               //HI NATH CANILANG!
 {
     public partial class TableForm : Form
     {
