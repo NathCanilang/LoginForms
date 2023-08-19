@@ -21,6 +21,8 @@ namespace LoginForms
         string[] Password = { "admin123", "admin456" };
         Form loginForm = null;
 
+        
+
         CreateForm form2 = new CreateForm();
         TableForm form3 = new TableForm();
 
@@ -28,6 +30,7 @@ namespace LoginForms
         public LoginForm()
         {
             InitializeComponent();
+            
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -49,22 +52,42 @@ namespace LoginForms
         {
             string username = UsernameTxtbox.Text;
             string password = PasswordTxtbox.Text;
+            CreateForm form = new CreateForm();
+            TableForm tableForm = new TableForm();
 
 
             for (int i = 0; i < Username.Length; i++)
             {
                 if (UsernameTxtbox.Text == Username[i] && PasswordTxtbox.Text == Password[i])
                 {
-                    if (i == 0)
+
+                    if (i == 0 || i == 1) // Assuming Admin1 and Admin2 are admin users
                     {
-                        loginForm = new TableForm(); 
+                        loginForm = new TableForm();
+                         tableForm = loginForm as TableForm;
+                        if (tableForm != null)
+                        {
+                            tableForm.SetCreateFormInstance(form2);
+                        }
+                    }
+
+                    break;
+                    /*if (i == 0)
+                    {
+                        loginForm = new TableForm();
+                        ///
+                        tableForm = loginForm as TableForm;
                     }
                     else if (i == 1)
                     {
                         loginForm = new TableForm(); 
                     }
+                    else if(tableForm != null)
+                    {
+                        tableForm.SetCreateFormInstance(form2);
+                    }
 
-                    break;
+                    break;*/
                 }
             }
 
@@ -72,7 +95,7 @@ namespace LoginForms
             {
                 MessageBox.Show("Login Complete.", "Attention!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.WindowState = FormWindowState.Minimized;
-                loginForm.ShowDialog();
+                loginForm.Show();
                 this.WindowState = FormWindowState.Normal;
             }
 
@@ -80,7 +103,7 @@ namespace LoginForms
             {
                 MessageBox.Show("Login Complete.", "Attention!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.WindowState = FormWindowState.Minimized;
-                form2.ShowDialog();
+                form2.Show();
                 this.WindowState = FormWindowState.Normal;
             }
            
@@ -129,6 +152,7 @@ namespace LoginForms
         private void CreateLbl_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             this.WindowState = FormWindowState.Minimized;
+            form2 = new CreateForm();
             form2.ShowDialog();
             this.WindowState = FormWindowState.Normal;
         }
@@ -148,6 +172,11 @@ namespace LoginForms
                 string hashedInputPassword = Convert.ToBase64String(hashBytes);
                 return hashedPassword == hashedInputPassword;
             }
+        }
+
+        private void BackgroundPanel_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

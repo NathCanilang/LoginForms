@@ -38,11 +38,11 @@
             this.PasswordLbl = new System.Windows.Forms.Label();
             this.BackgroundPanel = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.CreateLbl = new System.Windows.Forms.LinkLabel();
             this.label1 = new System.Windows.Forms.Label();
             this.Close = new System.Windows.Forms.PictureBox();
             this.Show = new System.Windows.Forms.PictureBox();
             this.LogoPicture = new System.Windows.Forms.PictureBox();
-            this.CreateLbl = new System.Windows.Forms.LinkLabel();
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
             this.BackgroundPanel.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -146,6 +146,7 @@
             this.BackgroundPanel.Name = "BackgroundPanel";
             this.BackgroundPanel.Size = new System.Drawing.Size(451, 484);
             this.BackgroundPanel.TabIndex = 12;
+            this.BackgroundPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.BackgroundPanel_Paint);
             // 
             // panel1
             // 
@@ -156,6 +157,18 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(450, 40);
             this.panel1.TabIndex = 11;
+            // 
+            // CreateLbl
+            // 
+            this.CreateLbl.AutoSize = true;
+            this.CreateLbl.Font = new System.Drawing.Font("Verdana", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CreateLbl.Location = new System.Drawing.Point(220, 0);
+            this.CreateLbl.Name = "CreateLbl";
+            this.CreateLbl.Size = new System.Drawing.Size(140, 20);
+            this.CreateLbl.TabIndex = 1;
+            this.CreateLbl.TabStop = true;
+            this.CreateLbl.Text = "Create Account";
+            this.CreateLbl.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.CreateLbl_LinkClicked);
             // 
             // label1
             // 
@@ -200,18 +213,6 @@
             this.LogoPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.LogoPicture.TabIndex = 11;
             this.LogoPicture.TabStop = false;
-            // 
-            // CreateLbl
-            // 
-            this.CreateLbl.AutoSize = true;
-            this.CreateLbl.Font = new System.Drawing.Font("Verdana", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.CreateLbl.Location = new System.Drawing.Point(220, 0);
-            this.CreateLbl.Name = "CreateLbl";
-            this.CreateLbl.Size = new System.Drawing.Size(140, 20);
-            this.CreateLbl.TabIndex = 1;
-            this.CreateLbl.TabStop = true;
-            this.CreateLbl.Text = "Create Account";
-            this.CreateLbl.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.CreateLbl_LinkClicked);
             // 
             // LoginForm
             // 

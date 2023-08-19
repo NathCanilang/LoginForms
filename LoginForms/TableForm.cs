@@ -4,14 +4,18 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace LoginForms
 {
-    public partial class TableForm : Form
-    {
+       
+        public partial class TableForm : Form
+        {
+        private CreateForm createFormInstance;
+        public CreateForm createForms;
         public TableForm()
         {
             InitializeComponent();
@@ -37,6 +41,22 @@ namespace LoginForms
         private void ApporvalTable_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+        public void AddUser(string username, string password)
+        {
+            ApprovalTable.Rows.Add(username, password);
+        }
+
+        private void DisplayBtn_Click(object sender, EventArgs e)
+        {
+            if (createForms != null)
+            {
+            ApprovalTable.DataSource = new BindingSource(createFormInstance.AccountsIdentity, null);
+            }
+        }
+        public void SetCreateFormInstance(CreateForm form)
+        {
+            createFormInstance = form;
         }
     }
 }

@@ -8,14 +8,16 @@ namespace LoginForms
 {
     public partial class CreateForm : Form
     {
-    public Dictionary<string, string> AccountsIdentity = new Dictionary<string, string>();
-        TableForm tableForm;    
         
-       
-        public CreateForm(TableForm TF)
+        public Dictionary<string, string> AccountsIdentity = new Dictionary<string, string>();
+        
+        public string  user, pass;
+        
+        public CreateForm()
         {
             InitializeComponent();
-            this.tableForm = TF;
+            
+
         }
 
         private void Form2_Load(object sender, EventArgs e)
@@ -34,21 +36,21 @@ namespace LoginForms
             this.Close();
         }
 
-        
-
         private void CreateBtn_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(UsernameBox.Text) || string.IsNullOrEmpty(PasswordBox.Text))
-            {
-                MessageBox.Show("Missing Information!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            else
-            {
-                string hashedPassword = HashPassword(PasswordBox.Text);
-               
-                AccountsIdentity[UsernameBox.Text] = hashedPassword;
-                MessageBox.Show("Account Created", "Success!", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
+            TableForm tableForm = new TableForm();
+            
+             if (string.IsNullOrEmpty(UsernameBox.Text) || string.IsNullOrEmpty(PasswordBox.Text))
+             {
+                 MessageBox.Show("Missing Information!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+             }
+             else
+             {
+                 string hashedPassword = HashPassword(PasswordBox.Text);
+                 AccountsIdentity[UsernameBox.Text] = hashedPassword;
+                 tableForm.AddUser(UsernameBox.Text, PasswordBox.Text);
+                 MessageBox.Show("Account Created", "Success!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+             }
         }
 
         private void BackBtn_Click_1(object sender, EventArgs e)
