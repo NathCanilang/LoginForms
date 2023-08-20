@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
 using System.Security.Cryptography;
 using System.Windows.Forms;
 
@@ -8,16 +9,15 @@ namespace LoginForms
 {
     public partial class CreateForm : Form
     {
+        public static CreateForm instance;
         
-        public Dictionary<string, string> AccountsIdentity = new Dictionary<string, string>();
         
         public string  user, pass;
         
         public CreateForm()
         {
             InitializeComponent();
-            
-
+            instance = this;
         }
 
         private void Form2_Load(object sender, EventArgs e)
@@ -38,32 +38,38 @@ namespace LoginForms
 
         private void CreateBtn_Click(object sender, EventArgs e)
         {
-            TableForm tableForm = new TableForm();
-            
-             if (string.IsNullOrEmpty(UsernameBox.Text) || string.IsNullOrEmpty(PasswordBox.Text))
-             {
-                 MessageBox.Show("Missing Information!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-             }
-             else
-             {
-                 string hashedPassword = HashPassword(PasswordBox.Text);
-                 AccountsIdentity[UsernameBox.Text] = hashedPassword;
-                 tableForm.AddUser(UsernameBox.Text, PasswordBox.Text);
-                 MessageBox.Show("Account Created", "Success!", MessageBoxButtons.OK, MessageBoxIcon.Information);
-             }
+            bool usernameExists = false;
+
+            foreach (DataGridViewRow row in TableForm.instance.ApprovalTable.Rows)
+            {
+                string rowUsername = row.Cells["UsernameCol"].Value?.ToString();
+                if (rowUsername == UsernameBox.Text)
+                {
+                    usernameExists = true;
+                    MessageBox.Show("Username Already Exists", "Attention", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    break;
+                }
+            }
+
+            if (string.IsNullOrEmpty(UsernameBox.Text) || string.IsNullOrEmpty(PasswordBox.Text) || string.IsNullOrEmpty(EmailLbl.Text))
+            {
+                MessageBox.Show("Missing Information!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else if (!usernameExists) // Only proceed if the username doesn't exist
+            {
+                TableForm.instance.AddUser(UsernameBox.Text, PasswordBox.Text, MPINBox.Text);
+                MessageBox.Show("Account Created", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
 
         private void BackBtn_Click_1(object sender, EventArgs e)
         {
             this.Hide();
         }
-        private string HashPassword(string password)
+
+        private void MPINBox_TextChanged(object sender, EventArgs e)
         {
-            using (var sha256 = SHA256.Create())
-            {
-                byte[] hashBytes = sha256.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
-                return Convert.ToBase64String(hashBytes);
-            }
+
         }
 
         private void UsernameBox_TextChanged(object sender, EventArgs e)

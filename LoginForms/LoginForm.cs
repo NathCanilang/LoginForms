@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
@@ -10,6 +11,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Security.Principal;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -17,19 +19,23 @@ namespace LoginForms
 {
     public partial class LoginForm : Form
     {
-        string[] Username = { "Admin1", "Admin2" };
-        string[] Password = { "admin123", "admin456" };
-        Form loginForm = null;
-
-        
-
+        public static LoginForm instance;
+        public Dictionary<string, string> AccountsIdentity = new Dictionary<string, string>();
+        string[] adminUsernames = { "Admin1", "Admin2" };
+        string[] adminPasswords = { "admin123", "admin456" };
+        miscellaneous missform = new miscellaneous();
         CreateForm form2 = new CreateForm();
         TableForm form3 = new TableForm();
+       
+        //
+         int attempts = 3;
+         bool accessGranted = false;
+        object lockObject = new object();
 
-        
         public LoginForm()
         {
             InitializeComponent();
+            instance = this;
             
         }
 
@@ -52,68 +58,84 @@ namespace LoginForms
         {
             string username = UsernameTxtbox.Text;
             string password = PasswordTxtbox.Text;
-            CreateForm form = new CreateForm();
-            TableForm tableForm = new TableForm();
 
-
-            for (int i = 0; i < Username.Length; i++)
+            if (accessGranted)
             {
-                if (UsernameTxtbox.Text == Username[i] && PasswordTxtbox.Text == Password[i])
+                MessageBox.Show("Access Granted!", "Attention!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                Form nextForm = form3; 
+                this.WindowState = FormWindowState.Minimized;
+                nextForm.ShowDialog();
+                this.WindowState = FormWindowState.Normal;
+
+                return;
+            }
+
+            for (int i = 0; i < adminUsernames.Length; i++)
+            {
+                if (username == adminUsernames[i] && password == adminPasswords[i])
                 {
+                    MessageBox.Show("Login Complete.", "Attention!", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                    if (i == 0 || i == 1) // Assuming Admin1 and Admin2 are admin users
+                    Form nextForm;
+                    if (i == 0)
                     {
-                        loginForm = new TableForm();
-                         tableForm = loginForm as TableForm;
-                        if (tableForm != null)
-                        {
-                            tableForm.SetCreateFormInstance(form2);
-                        }
+                        nextForm = form3;
                     }
-
-                    break;
-                    /*if (i == 0)
+                    else
                     {
-                        loginForm = new TableForm();
-                        ///
-                        tableForm = loginForm as TableForm;
-                    }
-                    else if (i == 1)
-                    {
-                        loginForm = new TableForm(); 
-                    }
-                    else if(tableForm != null)
-                    {
-                        tableForm.SetCreateFormInstance(form2);
+                        nextForm = missform;
+                        missform.ShowDialog();
                     }
 
-                    break;*/
+                    this.WindowState = FormWindowState.Minimized;
+                    nextForm.ShowDialog();
+                    this.WindowState = FormWindowState.Normal;
+
+                    return;
                 }
             }
 
-            if (loginForm != null)
+            if (AccountsIdentity.TryGetValue(username, out string storedPassword))
             {
-                MessageBox.Show("Login Complete.", "Attention!", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                this.WindowState = FormWindowState.Minimized;
-                loginForm.Show();
-                this.WindowState = FormWindowState.Normal;
-            }
+                if (password == storedPassword)
+                {
+                    MessageBox.Show("Login Complete.", "Attention!", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-            else if (Authenticate(username, password))
-            {
-                MessageBox.Show("Login Complete.", "Attention!", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                this.WindowState = FormWindowState.Minimized;
-                form2.Show();
-                this.WindowState = FormWindowState.Normal;
+                    this.WindowState = FormWindowState.Minimized;
+                    missform.Show();
+                    this.WindowState = FormWindowState.Normal;
+                }
+                else
+                {
+                    MessageBox.Show("Invalid Credentials.", "Attention", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    AttemptFailure();
+                }
             }
-           
             else
             {
                 MessageBox.Show("Invalid Credentials!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                AttemptFailure();
+            }
+        }
+
+        private void AttemptFailure()
+        {
+            lock (lockObject)
+            {
+                attempts--;
+                if (attempts > 0)
+                {
+                    MessageBox.Show($"Access Denied! Try again. {attempts} {(attempts > 1 ? "attempts" : "attempt")} remaining.", "Attention", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+                else
+                {
+                    MessageBox.Show("No more attempts remaining.", "Attention", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Loginbtn.Enabled = false;
+                }
             }
         }
     
-
         private void Clearbtn_Click(object sender, EventArgs e)
         {
             UsernameTxtbox.Clear();
@@ -147,6 +169,7 @@ namespace LoginForms
 
         private void label1_Click_1(object sender, EventArgs e)
         {
+           
 
         }
         private void CreateLbl_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -156,27 +179,26 @@ namespace LoginForms
             form2.ShowDialog();
             this.WindowState = FormWindowState.Normal;
         }
-        private bool Authenticate(string username, string password)
-        {
-            if (form2.AccountsIdentity.TryGetValue(username, out string hashedPassword))
-            {
-                return VerifyPassword(password, hashedPassword);
-            }
-            return false;
-        }
-        private bool VerifyPassword(string password, string hashedPassword)
-        {
-            using (var sha256 = SHA256.Create())
-            {
-                byte[] hashBytes = sha256.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
-                string hashedInputPassword = Convert.ToBase64String(hashBytes);
-                return hashedPassword == hashedInputPassword;
-            }
-        }
-
+       
         private void BackgroundPanel_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        public void AddUserToDictionary(string username, string password)
+        {
+
+          AccountsIdentity.Add(username, password);
+
+        }
+
+        private void ForPasslbl_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            
+            this.WindowState = FormWindowState.Minimized;
+            ForgetPasswordForm forgetpasswordform = new ForgetPasswordForm();
+            forgetpasswordform.ShowDialog();
+            this.WindowState = FormWindowState.Normal;
         }
     }
 }

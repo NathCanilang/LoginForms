@@ -36,7 +36,7 @@
             this.CreateBtn = new System.Windows.Forms.Button();
             this.BackBtn = new System.Windows.Forms.Button();
             this.MPINBox = new System.Windows.Forms.TextBox();
-            this.MPINLabel = new System.Windows.Forms.Label();
+            this.EmailLbl = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // UsernameBox
@@ -98,22 +98,23 @@
             this.MPINBox.Name = "MPINBox";
             this.MPINBox.Size = new System.Drawing.Size(185, 22);
             this.MPINBox.TabIndex = 6;
+            this.MPINBox.TextChanged += new System.EventHandler(this.MPINBox_TextChanged);
             // 
-            // MPINLabel
+            // EmailLbl
             // 
-            this.MPINLabel.AutoSize = true;
-            this.MPINLabel.Location = new System.Drawing.Point(219, 241);
-            this.MPINLabel.Name = "MPINLabel";
-            this.MPINLabel.Size = new System.Drawing.Size(40, 16);
-            this.MPINLabel.TabIndex = 7;
-            this.MPINLabel.Text = "MPIN";
+            this.EmailLbl.AutoSize = true;
+            this.EmailLbl.Location = new System.Drawing.Point(219, 241);
+            this.EmailLbl.Name = "EmailLbl";
+            this.EmailLbl.Size = new System.Drawing.Size(45, 16);
+            this.EmailLbl.TabIndex = 7;
+            this.EmailLbl.Text = "E-mail";
             // 
             // CreateForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(688, 506);
-            this.Controls.Add(this.MPINLabel);
+            this.Controls.Add(this.EmailLbl);
             this.Controls.Add(this.MPINBox);
             this.Controls.Add(this.BackBtn);
             this.Controls.Add(this.CreateBtn);
@@ -140,6 +141,6 @@
         private System.Windows.Forms.Button CreateBtn;
         private System.Windows.Forms.Button BackBtn;
         private System.Windows.Forms.TextBox MPINBox;
-        private System.Windows.Forms.Label MPINLabel;
+        private System.Windows.Forms.Label EmailLbl;
     }
 }

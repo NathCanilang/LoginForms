@@ -11,22 +11,27 @@ using System.Windows.Forms;
 
 namespace LoginForms
 {
-       
-        public partial class TableForm : Form
-        {
-        private CreateForm createFormInstance;
+
+    public partial class TableForm : Form
+    {
+        public static TableForm instance;
+
         public CreateForm createForms;
+
+        string rowUsername;
+        string rowPassword; 
+
         public TableForm()
         {
             InitializeComponent();
+            instance = this;
+
         }
 
         private void Form3_Load(object sender, EventArgs e)
         {
             this.TopMost = true;
         }
-
-        
 
         private void RejectBtn_Click(object sender, EventArgs e)
         {
@@ -42,21 +47,62 @@ namespace LoginForms
         {
 
         }
-        public void AddUser(string username, string password)
+        public void AddUser(string username, string password, string Email)
         {
-            ApprovalTable.Rows.Add(username, password);
+            ApprovalTable.Rows.Add(username, password, Email);
         }
 
-        private void DisplayBtn_Click(object sender, EventArgs e)
+        private void ApproveBtn_Click(object sender, EventArgs e)
         {
-            if (createForms != null)
+            int selectedRowCount = ApprovalTable.SelectedRows.Count;
+
+            if (selectedRowCount > 0)
             {
-            ApprovalTable.DataSource = new BindingSource(createFormInstance.AccountsIdentity, null);
+                foreach (DataGridViewRow selectedRow in ApprovalTable.SelectedRows)
+                {
+                    string selectedUsername = (string)selectedRow.Cells["UsernameCol"].Value;
+
+                    if (LoginForm.instance.AccountsIdentity.ContainsKey(selectedUsername))
+                    {
+                        MessageBox.Show("Username already exists.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        break;
+                    }
+                    else
+                    {
+                        LoginForm.instance.AddUserToDictionary(selectedUsername, (string)selectedRow.Cells["PasswordCol"].Value);
+                        MessageBox.Show("Account Approved", "Approval", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                         selectedRow.Visible = false; 
+                    }
+                }
             }
         }
-        public void SetCreateFormInstance(CreateForm form)
+
+        public void CheckCredentials(string username, string Email)
         {
-            createFormInstance = form;
+            bool credentialsFound = false;
+            string foundPassword = "";
+
+            foreach (DataGridViewRow row in ApprovalTable.Rows)
+            {
+                string rowUsername = row.Cells["UsernameCol"].Value?.ToString();
+                string rowEmail = row.Cells["EmailCol"].Value?.ToString();
+
+                if (rowUsername == username && rowEmail == Email)
+                {
+                    credentialsFound = true;
+                    foundPassword = row.Cells["PasswordCol"].Value.ToString();
+                    break;
+                }
+            }
+
+            if (credentialsFound)
+            {
+                MessageBox.Show("Your Password is: " + foundPassword, "Notice", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("Invalid credentials.");
+            }
         }
     }
 }
