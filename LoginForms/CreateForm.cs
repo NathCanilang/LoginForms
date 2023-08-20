@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
 using System.Security.Cryptography;
 using System.Windows.Forms;
 
@@ -8,14 +9,15 @@ namespace LoginForms
 {
     public partial class CreateForm : Form
     {
-    public Dictionary<string, string> AccountsIdentity = new Dictionary<string, string>();
-        TableForm tableForm;    
+        public static CreateForm instance;
         
-       
-        public CreateForm(TableForm TF)
+        
+        public string  user, pass;
+        
+        public CreateForm()
         {
             InitializeComponent();
-            this.tableForm = TF;
+            instance = this;
         }
 
         private void Form2_Load(object sender, EventArgs e)
@@ -34,20 +36,29 @@ namespace LoginForms
             this.Close();
         }
 
-        
-
         private void CreateBtn_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(UsernameBox.Text) || string.IsNullOrEmpty(PasswordBox.Text))
+            bool usernameExists = false;
+
+            foreach (DataGridViewRow row in TableForm.instance.ApprovalTable.Rows)
+            {
+                string rowUsername = row.Cells["UsernameCol"].Value?.ToString();
+                if (rowUsername == UsernameBox.Text)
+                {
+                    usernameExists = true;
+                    MessageBox.Show("Username Already Exists", "Attention", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    break;
+                }
+            }
+
+            if (string.IsNullOrEmpty(UsernameBox.Text) || string.IsNullOrEmpty(PasswordBox.Text) || string.IsNullOrEmpty(EmailLbl.Text))
             {
                 MessageBox.Show("Missing Information!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            else
+            else if (!usernameExists) // Only proceed if the username doesn't exist
             {
-                string hashedPassword = HashPassword(PasswordBox.Text);
-               
-                AccountsIdentity[UsernameBox.Text] = hashedPassword;
-                MessageBox.Show("Account Created", "Success!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                TableForm.instance.AddUser(UsernameBox.Text, PasswordBox.Text, MPINBox.Text);
+                MessageBox.Show("Account Created", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -55,13 +66,10 @@ namespace LoginForms
         {
             this.Hide();
         }
-        private string HashPassword(string password)
+
+        private void MPINBox_TextChanged(object sender, EventArgs e)
         {
-            using (var sha256 = SHA256.Create())
-            {
-                byte[] hashBytes = sha256.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
-                return Convert.ToBase64String(hashBytes);
-            }
+
         }
 
         private void UsernameBox_TextChanged(object sender, EventArgs e)
