@@ -55,7 +55,7 @@ namespace LoginForms
             {
                 MessageBox.Show("Missing Information!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            else if (!usernameExists) // Only proceed if the username doesn't exist
+            else if (!usernameExists) 
             {
                 TableForm.instance.AddUser(UsernameBox.Text, PasswordBox.Text, MPINBox.Text);
                 MessageBox.Show("Account Created", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
