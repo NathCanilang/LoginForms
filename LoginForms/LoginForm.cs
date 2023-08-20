@@ -21,15 +21,16 @@ namespace LoginForms
     {
         public static LoginForm instance;
         public Dictionary<string, string> AccountsIdentity = new Dictionary<string, string>();
+
         string[] adminUsernames = { "Admin1", "Admin2" };
         string[] adminPasswords = { "admin123", "admin456" };
+
         miscellaneous missform = new miscellaneous();
         CreateForm form2 = new CreateForm();
         TableForm form3 = new TableForm();
        
-        //
-         int attempts = 3;
-         bool accessGranted = false;
+        int attempts = 3;
+        bool accessGranted = false;
         object lockObject = new object();
 
         public LoginForm()
