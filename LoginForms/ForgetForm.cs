@@ -19,13 +19,14 @@ namespace LoginForms
 
         private void button1_Click(object sender, EventArgs e)
         {
-            UsernameVerificationBox.Clear();
-            EmailVerificationBox.Clear();
 
             string VerifyUsername = UsernameVerificationBox.Text;
             string VerifyEmail = EmailVerificationBox.Text;
 
             TableForm.instance.CheckCredentials(VerifyUsername, VerifyEmail);
+
+            UsernameVerificationBox.Clear();
+            EmailVerificationBox.Clear();
         }
 
         private void ForgetPasswordForm_Load(object sender, EventArgs e)

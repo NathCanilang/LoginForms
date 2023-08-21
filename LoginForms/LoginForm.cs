@@ -41,7 +41,7 @@ namespace LoginForms
         {
             InitializeComponent();
             instance = this;
-            //
+            
             cooldownTimer = new System.Windows.Forms.Timer();
             cooldownTimer.Interval = 10000; 
             cooldownTimer.Tick += CooldownTimer_Tick; 
@@ -50,9 +50,6 @@ namespace LoginForms
 
         private void Loginbtn_Click(object sender, EventArgs e)
         {
-            UsernameTxtbox.Clear();
-            PasswordTxtbox.Clear ();
-
             if (cooldownActive)
             {
                 MessageBox.Show("Cooldown period active. Please wait.", "Attention", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -62,11 +59,14 @@ namespace LoginForms
             string username = UsernameTxtbox.Text;
             string password = PasswordTxtbox.Text;
 
+            UsernameTxtbox.Clear();
+            PasswordTxtbox.Clear();
+
             if (accessGranted)
             {
                 MessageBox.Show("Access Granted!", "Attention!", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                Form nextForm = form3; // Assuming accessGranted leads to form3
+                Form nextForm = form3;
                 this.WindowState = FormWindowState.Minimized;
                 nextForm.ShowDialog();
                 this.WindowState = FormWindowState.Normal;
@@ -145,11 +145,7 @@ namespace LoginForms
                     MessageBox.Show("Invalid Password.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     AttemptFailure();
                     return;
-                }
-                else
-                {
-
-                }
+                }     
         }
 
         private void AttemptFailure()
@@ -163,7 +159,7 @@ namespace LoginForms
                 }
                 else
                 {
-                    MessageBox.Show("No more attempts remaining. Cooldown activated.", "Attention", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("No more attempts remaining. 10 Seoconds Cooldown activated.", "Attention", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     StartCooldownTimer();
                 }
             }
