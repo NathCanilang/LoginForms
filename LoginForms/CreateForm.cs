@@ -32,7 +32,6 @@ namespace LoginForms
 
         private void BackBtn_Click(object sender, EventArgs e)
         {
-           
             this.Close();
         }
 
@@ -51,7 +50,7 @@ namespace LoginForms
                 }
             }
 
-            if (string.IsNullOrEmpty(UsernameBox.Text) || string.IsNullOrEmpty(PasswordBox.Text) || string.IsNullOrEmpty(EmailLbl.Text))
+            if (string.IsNullOrEmpty(UsernameBox.Text) || string.IsNullOrEmpty(PasswordBox.Text) || string.IsNullOrEmpty(MPINBox.Text))
             {
                 MessageBox.Show("Missing Information!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }

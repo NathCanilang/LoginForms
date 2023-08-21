@@ -97,7 +97,7 @@
             this.UsernameTxtbox.Name = "UsernameTxtbox";
             this.UsernameTxtbox.Size = new System.Drawing.Size(269, 34);
             this.UsernameTxtbox.TabIndex = 0;
-            this.UsernameTxtbox.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            //this.UsernameTxtbox.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // PasswordTxtbox
             // 
@@ -111,7 +111,7 @@
             this.PasswordTxtbox.PasswordChar = '*';
             this.PasswordTxtbox.Size = new System.Drawing.Size(269, 34);
             this.PasswordTxtbox.TabIndex = 1;
-            this.PasswordTxtbox.TextChanged += new System.EventHandler(this.Passwordtxtbox_TextChanged);
+           
             // 
             // UsernameLbl
             // 
@@ -123,7 +123,7 @@
             this.UsernameLbl.Size = new System.Drawing.Size(124, 25);
             this.UsernameLbl.TabIndex = 2;
             this.UsernameLbl.Text = "Username";
-            this.UsernameLbl.Click += new System.EventHandler(this.label1_Click);
+           // this.UsernameLbl.Click += new System.EventHandler(this.label1_Click);
             // 
             // PasswordLbl
             // 
@@ -155,7 +155,7 @@
             this.BackgroundPanel.Name = "BackgroundPanel";
             this.BackgroundPanel.Size = new System.Drawing.Size(451, 484);
             this.BackgroundPanel.TabIndex = 12;
-            this.BackgroundPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.BackgroundPanel_Paint);
+          //  this.BackgroundPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.BackgroundPanel_Paint);
             // 
             // ForPasslbl
             // 
@@ -201,7 +201,6 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "No Account?";
             this.label1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.label1.Click += new System.EventHandler(this.label1_Click_1);
             // 
             // Close
             // 
@@ -263,7 +262,6 @@
             this.Name = "LoginForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = " Login Form";
-            this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).EndInit();
             this.BackgroundPanel.ResumeLayout(false);
             this.BackgroundPanel.PerformLayout();

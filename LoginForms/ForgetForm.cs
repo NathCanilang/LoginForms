@@ -19,6 +19,9 @@ namespace LoginForms
 
         private void button1_Click(object sender, EventArgs e)
         {
+            UsernameVerificationBox.Clear();
+            EmailVerificationBox.Clear();
+
             string VerifyUsername = UsernameVerificationBox.Text;
             string VerifyEmail = EmailVerificationBox.Text;
 
