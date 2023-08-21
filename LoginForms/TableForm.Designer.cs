@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TableForm));
             this.ApproveBtn = new System.Windows.Forms.Button();
             this.RejectBtn = new System.Windows.Forms.Button();
             this.BackBtn = new System.Windows.Forms.Button();
@@ -35,12 +36,7 @@
             this.UsernameCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PasswordCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.EmailCol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.BackupTable = new System.Windows.Forms.DataGridView();
-            this.UsernameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Password = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Email = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.ApprovalTable)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.BackupTable)).BeginInit();
             this.SuspendLayout();
             // 
             // ApproveBtn
@@ -87,7 +83,7 @@
             this.ApprovalTable.RowTemplate.Height = 24;
             this.ApprovalTable.Size = new System.Drawing.Size(354, 203);
             this.ApprovalTable.TabIndex = 4;
-            this.ApprovalTable.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ApporvalTable_CellContentClick);
+            // this.ApprovalTable.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ApporvalTable_CellContentClick);
             // 
             // UsernameCol
             // 
@@ -107,57 +103,21 @@
             this.EmailCol.MinimumWidth = 6;
             this.EmailCol.Name = "EmailCol";
             // 
-            // BackupTable
-            // 
-            this.BackupTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.BackupTable.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.UsernameColumn,
-            this.Password,
-            this.Email});
-            this.BackupTable.Location = new System.Drawing.Point(541, 57);
-            this.BackupTable.Name = "BackupTable";
-            this.BackupTable.RowHeadersWidth = 51;
-            this.BackupTable.RowTemplate.Height = 24;
-            this.BackupTable.Size = new System.Drawing.Size(93, 203);
-            this.BackupTable.TabIndex = 5;
-            // 
-            // UsernameColumn
-            // 
-            this.UsernameColumn.HeaderText = "Username";
-            this.UsernameColumn.MinimumWidth = 6;
-            this.UsernameColumn.Name = "UsernameColumn";
-            this.UsernameColumn.Width = 125;
-            // 
-            // Password
-            // 
-            this.Password.HeaderText = "PasswordColumn";
-            this.Password.MinimumWidth = 6;
-            this.Password.Name = "Password";
-            this.Password.Width = 125;
-            // 
-            // Email
-            // 
-            this.Email.HeaderText = "EmailColumn";
-            this.Email.MinimumWidth = 6;
-            this.Email.Name = "Email";
-            this.Email.Width = 125;
-            // 
             // TableForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(649, 357);
-            this.Controls.Add(this.BackupTable);
             this.Controls.Add(this.ApprovalTable);
             this.Controls.Add(this.BackBtn);
             this.Controls.Add(this.RejectBtn);
             this.Controls.Add(this.ApproveBtn);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "TableForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Form3";
+            this.Text = "Account Approval";
             this.Load += new System.EventHandler(this.Form3_Load);
             ((System.ComponentModel.ISupportInitialize)(this.ApprovalTable)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.BackupTable)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -170,9 +130,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn UsernameCol;
         private System.Windows.Forms.DataGridViewTextBoxColumn PasswordCol;
         private System.Windows.Forms.DataGridViewTextBoxColumn EmailCol;
-        private System.Windows.Forms.DataGridView BackupTable;
-        private System.Windows.Forms.DataGridViewTextBoxColumn UsernameColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Password;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Email;
     }
 }

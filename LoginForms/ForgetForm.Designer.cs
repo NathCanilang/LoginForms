@@ -52,7 +52,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(158, 263);
+            this.button1.Location = new System.Drawing.Point(229, 263);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 2;
@@ -80,7 +80,7 @@
             // 
             // BackBtn
             // 
-            this.BackBtn.Location = new System.Drawing.Point(31, 273);
+            this.BackBtn.Location = new System.Drawing.Point(117, 263);
             this.BackBtn.Name = "BackBtn";
             this.BackBtn.Size = new System.Drawing.Size(75, 23);
             this.BackBtn.TabIndex = 5;
@@ -100,7 +100,8 @@
             this.Controls.Add(this.EmailVerificationBox);
             this.Controls.Add(this.UsernameVerificationBox);
             this.Name = "ForgetPasswordForm";
-            this.Text = "Form2";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Forgot Password";
             this.Load += new System.EventHandler(this.ForgetPasswordForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

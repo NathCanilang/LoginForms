@@ -25,7 +25,6 @@ namespace LoginForms
         {
             InitializeComponent();
             instance = this;
-
         }
 
         private void Form3_Load(object sender, EventArgs e)
@@ -35,17 +34,17 @@ namespace LoginForms
 
         private void RejectBtn_Click(object sender, EventArgs e)
         {
-
+            if (ApprovalTable.SelectedRows.Count > 0)
+            {
+                int selectedIndex = ApprovalTable.SelectedRows[0].Index;
+                ApprovalTable.Rows.RemoveAt(selectedIndex);
+            }
+           
         }
 
         private void BackBtn_Click(object sender, EventArgs e)
         {
             this.Hide();
-        }
-
-        private void ApporvalTable_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
         }
         public void AddUser(string username, string password, string Email)
         {
@@ -71,7 +70,7 @@ namespace LoginForms
                     {
                         LoginForm.instance.AddUserToDictionary(selectedUsername, (string)selectedRow.Cells["PasswordCol"].Value);
                         MessageBox.Show("Account Approved", "Approval", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                         selectedRow.Visible = false; 
+                        selectedRow.Visible = false; 
                     }
                 }
             }

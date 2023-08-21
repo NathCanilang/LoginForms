@@ -15,12 +15,15 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
 namespace LoginForms
 {
     public partial class LoginForm : Form
     {
         public static LoginForm instance;
         public Dictionary<string, string> AccountsIdentity = new Dictionary<string, string>();
+        
+        private System.Windows.Forms.Timer cooldownTimer;
 
         string[] adminUsernames = { "Admin1", "Admin2" };
         string[] adminPasswords = { "admin123", "admin456" };
@@ -32,31 +35,30 @@ namespace LoginForms
         int attempts = 3;
         bool accessGranted = false;
         object lockObject = new object();
+        bool cooldownActive = false;
 
         public LoginForm()
         {
             InitializeComponent();
             instance = this;
-            
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
+            //
+            cooldownTimer = new System.Windows.Forms.Timer();
+            cooldownTimer.Interval = 10000; 
+            cooldownTimer.Tick += CooldownTimer_Tick; 
 
         }
 
         private void Loginbtn_Click(object sender, EventArgs e)
         {
+            UsernameTxtbox.Clear();
+            PasswordTxtbox.Clear ();
+
+            if (cooldownActive)
+            {
+                MessageBox.Show("Cooldown period active. Please wait.", "Attention", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             string username = UsernameTxtbox.Text;
             string password = PasswordTxtbox.Text;
 
@@ -64,7 +66,7 @@ namespace LoginForms
             {
                 MessageBox.Show("Access Granted!", "Attention!", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                Form nextForm = form3; 
+                Form nextForm = form3; // Assuming accessGranted leads to form3
                 this.WindowState = FormWindowState.Minimized;
                 nextForm.ShowDialog();
                 this.WindowState = FormWindowState.Normal;
@@ -72,28 +74,37 @@ namespace LoginForms
                 return;
             }
 
+            bool usernameCorrect = false;
+            bool passwordCorrect = false;
+
             for (int i = 0; i < adminUsernames.Length; i++)
             {
-                if (username == adminUsernames[i] && password == adminPasswords[i])
+                if (username == adminUsernames[i])
                 {
-                    MessageBox.Show("Login Complete.", "Attention!", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                    Form nextForm;
-                    if (i == 0)
+                    usernameCorrect = true;
+                    if (password == adminPasswords[i])
                     {
-                        nextForm = form3;
-                    }
-                    else
-                    {
-                        nextForm = missform;
-                        missform.ShowDialog();
-                    }
+                        passwordCorrect = true;
 
-                    this.WindowState = FormWindowState.Minimized;
-                    nextForm.ShowDialog();
-                    this.WindowState = FormWindowState.Normal;
+                        MessageBox.Show("Login Complete.", "Attention!", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                    return;
+                        Form nextForm;
+                        if (i == 0)
+                        {
+                            nextForm = form3;
+                        }
+                        else
+                        {
+                            nextForm = missform;
+                        }
+
+                        this.WindowState = FormWindowState.Minimized;
+                        nextForm.ShowDialog();
+                        this.WindowState = FormWindowState.Normal;
+
+                        return;
+                    }
+                    break;
                 }
             }
 
@@ -106,18 +117,39 @@ namespace LoginForms
                     this.WindowState = FormWindowState.Minimized;
                     missform.Show();
                     this.WindowState = FormWindowState.Normal;
+
+                    return;
                 }
                 else
                 {
-                    MessageBox.Show("Invalid Credentials.", "Attention", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Invalid Password.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     AttemptFailure();
                 }
+                return;
             }
-            else
-            {
-                MessageBox.Show("Invalid Credentials!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                AttemptFailure();
-            }
+
+                 if (!usernameCorrect && !passwordCorrect)
+                {
+                    MessageBox.Show("Invalid Username and Password.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    AttemptFailure();
+                    return;
+                }
+               else if (!usernameCorrect)
+                {
+                    MessageBox.Show("Invalid Credentials.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    AttemptFailure();
+                    return;
+                }
+                else if (!passwordCorrect)
+                {
+                    MessageBox.Show("Invalid Password.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    AttemptFailure();
+                    return;
+                }
+                else
+                {
+
+                }
         }
 
         private void AttemptFailure()
@@ -131,21 +163,30 @@ namespace LoginForms
                 }
                 else
                 {
-                    MessageBox.Show("No more attempts remaining.", "Attention", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    Loginbtn.Enabled = false;
+                    MessageBox.Show("No more attempts remaining. Cooldown activated.", "Attention", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    StartCooldownTimer();
                 }
             }
         }
-    
+
+        private void StartCooldownTimer()
+        {
+            cooldownActive = true;
+            cooldownTimer.Start();
+        }
+
+        private void CooldownTimer_Tick(object sender, EventArgs e)
+        {
+            cooldownActive = false;
+            cooldownTimer.Stop();
+            attempts = 3; 
+            MessageBox.Show("Cooldown period ended. You can try again now.", "Attention", MessageBoxButtons.OK, MessageBoxIcon.Information);  
+        }
+
         private void Clearbtn_Click(object sender, EventArgs e)
         {
             UsernameTxtbox.Clear();
             PasswordTxtbox.Clear();
-        }
-
-        private void Passwordtxtbox_TextChanged(object sender, EventArgs e)
-        {
-
         }
 
         private void Show_Click(object sender, EventArgs e)
@@ -167,12 +208,7 @@ namespace LoginForms
                 PasswordTxtbox.PasswordChar = '*';
             }
         }
-
-        private void label1_Click_1(object sender, EventArgs e)
-        {
-           
-
-        }
+        
         private void CreateLbl_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             this.WindowState = FormWindowState.Minimized;
@@ -180,17 +216,10 @@ namespace LoginForms
             form2.ShowDialog();
             this.WindowState = FormWindowState.Normal;
         }
-       
-        private void BackgroundPanel_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
 
         public void AddUserToDictionary(string username, string password)
         {
-
           AccountsIdentity.Add(username, password);
-
         }
 
         private void ForPasslbl_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
