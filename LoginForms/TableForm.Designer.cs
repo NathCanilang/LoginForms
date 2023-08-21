@@ -79,29 +79,32 @@
             this.EmailCol});
             this.ApprovalTable.Location = new System.Drawing.Point(137, 57);
             this.ApprovalTable.Name = "ApprovalTable";
+            this.ApprovalTable.ReadOnly = true;
             this.ApprovalTable.RowHeadersWidth = 51;
             this.ApprovalTable.RowTemplate.Height = 24;
             this.ApprovalTable.Size = new System.Drawing.Size(354, 203);
             this.ApprovalTable.TabIndex = 4;
-            // this.ApprovalTable.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.ApporvalTable_CellContentClick);
             // 
             // UsernameCol
             // 
             this.UsernameCol.HeaderText = "Username";
             this.UsernameCol.MinimumWidth = 6;
             this.UsernameCol.Name = "UsernameCol";
+            this.UsernameCol.ReadOnly = true;
             // 
             // PasswordCol
             // 
             this.PasswordCol.HeaderText = "Password";
             this.PasswordCol.MinimumWidth = 6;
             this.PasswordCol.Name = "PasswordCol";
+            this.PasswordCol.ReadOnly = true;
             // 
             // EmailCol
             // 
             this.EmailCol.HeaderText = "E-mail";
             this.EmailCol.MinimumWidth = 6;
             this.EmailCol.Name = "EmailCol";
+            this.EmailCol.ReadOnly = true;
             // 
             // TableForm
             // 

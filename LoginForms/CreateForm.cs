@@ -56,9 +56,14 @@ namespace LoginForms
             }
             else if (!usernameExists) 
             {
-                TableForm.instance.AddUser(UsernameBox.Text, PasswordBox.Text, MPINBox.Text);
+                string gmailAttatch = MPINBox.Text + "@gmail.com";
+                TableForm.instance.AddUser(UsernameBox.Text, PasswordBox.Text, gmailAttatch);
                 MessageBox.Show("Account Created", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
+
+            UsernameBox.Clear();
+            PasswordBox.Clear();
+            MPINBox.Clear();
         }
 
         private void BackBtn_Click_1(object sender, EventArgs e)

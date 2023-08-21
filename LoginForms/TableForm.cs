@@ -38,8 +38,12 @@ namespace LoginForms
             {
                 int selectedIndex = ApprovalTable.SelectedRows[0].Index;
                 ApprovalTable.Rows.RemoveAt(selectedIndex);
+
+            } 
+            else if (ApprovalTable.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Please Select A Row First", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-           
         }
 
         private void BackBtn_Click(object sender, EventArgs e)
@@ -73,6 +77,10 @@ namespace LoginForms
                         selectedRow.Visible = false; 
                     }
                 }
+                ////
+            } else if (selectedRowCount == 0)
+            {
+                MessageBox.Show("Please Select A Row First", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
@@ -100,7 +108,7 @@ namespace LoginForms
             }
             else
             {
-                MessageBox.Show("Invalid credentials.");
+                MessageBox.Show("Invalid credentials.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }
