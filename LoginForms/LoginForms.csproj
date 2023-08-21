@@ -136,6 +136,12 @@
     <None Include="Resources\Moonbase login1.png" />
     <None Include="Resources\Moonbase login2.png" />
     <None Include="Resources\Moonbase login3.png" />
+    <None Include="Resources\TUBA_Forgot.png" />
+    <None Include="Resources\TUBA_1.png" />
+    <None Include="Resources\TUBA_Greetings.png" />
+    <None Include="Resources\TUBA_Forgot1.png" />
+    <None Include="Resources\TUBA_ForgotPass.png" />
+    <None Include="Resources\TUBA_OuterSpace.png" />
     <Content Include="ShowPassword.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
