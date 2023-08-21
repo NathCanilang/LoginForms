@@ -76,6 +76,11 @@ namespace LoginForms
 
         }
 
+        private void Passwordlbl_Click(object sender, EventArgs e)
+        {
+
+        }
+
         private void UsernameBox_TextChanged(object sender, EventArgs e)
         {
 

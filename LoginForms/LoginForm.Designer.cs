@@ -37,6 +37,7 @@
             this.UsernameLbl = new System.Windows.Forms.Label();
             this.PasswordLbl = new System.Windows.Forms.Label();
             this.BackgroundPanel = new System.Windows.Forms.Panel();
+            this.RememberCheckBox = new System.Windows.Forms.CheckBox();
             this.ForPasslbl = new System.Windows.Forms.LinkLabel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.CreateLbl = new System.Windows.Forms.LinkLabel();
@@ -44,7 +45,6 @@
             this.Close = new System.Windows.Forms.PictureBox();
             this.Show = new System.Windows.Forms.PictureBox();
             this.LogoPicture = new System.Windows.Forms.PictureBox();
-            this.RememberCheckBox = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
             this.BackgroundPanel.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -61,7 +61,7 @@
             // Loginbtn
             // 
             this.Loginbtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(225)))), ((int)(((byte)(87)))), ((int)(((byte)(85)))));
-            this.Loginbtn.Font = new System.Drawing.Font("Verdana", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Loginbtn.Font = new System.Drawing.Font("Simple Handmade", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Loginbtn.ForeColor = System.Drawing.Color.White;
             this.Loginbtn.Location = new System.Drawing.Point(122, 328);
             this.Loginbtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -75,7 +75,7 @@
             // Clearbtn
             // 
             this.Clearbtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(225)))), ((int)(((byte)(87)))), ((int)(((byte)(85)))));
-            this.Clearbtn.Font = new System.Drawing.Font("Verdana", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Clearbtn.Font = new System.Drawing.Font("Simple Handmade", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Clearbtn.ForeColor = System.Drawing.Color.White;
             this.Clearbtn.Location = new System.Drawing.Point(26, 264);
             this.Clearbtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -89,7 +89,7 @@
             // UsernameTxtbox
             // 
             this.UsernameTxtbox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(225)))), ((int)(((byte)(87)))), ((int)(((byte)(85)))));
-            this.UsernameTxtbox.Font = new System.Drawing.Font("Verdana", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.UsernameTxtbox.Font = new System.Drawing.Font("Simple Handmade", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.UsernameTxtbox.ForeColor = System.Drawing.Color.White;
             this.UsernameTxtbox.Location = new System.Drawing.Point(27, 103);
             this.UsernameTxtbox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -97,12 +97,11 @@
             this.UsernameTxtbox.Name = "UsernameTxtbox";
             this.UsernameTxtbox.Size = new System.Drawing.Size(269, 34);
             this.UsernameTxtbox.TabIndex = 0;
-            //this.UsernameTxtbox.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // PasswordTxtbox
             // 
             this.PasswordTxtbox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(225)))), ((int)(((byte)(87)))), ((int)(((byte)(85)))));
-            this.PasswordTxtbox.Font = new System.Drawing.Font("Verdana", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.PasswordTxtbox.Font = new System.Drawing.Font("Simple Handmade", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.PasswordTxtbox.ForeColor = System.Drawing.Color.White;
             this.PasswordTxtbox.Location = new System.Drawing.Point(27, 197);
             this.PasswordTxtbox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -111,28 +110,26 @@
             this.PasswordTxtbox.PasswordChar = '*';
             this.PasswordTxtbox.Size = new System.Drawing.Size(269, 34);
             this.PasswordTxtbox.TabIndex = 1;
-           
             // 
             // UsernameLbl
             // 
             this.UsernameLbl.AutoSize = true;
-            this.UsernameLbl.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.UsernameLbl.Font = new System.Drawing.Font("Simple Handmade", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.UsernameLbl.ForeColor = System.Drawing.Color.White;
             this.UsernameLbl.Location = new System.Drawing.Point(21, 76);
             this.UsernameLbl.Name = "UsernameLbl";
-            this.UsernameLbl.Size = new System.Drawing.Size(124, 25);
+            this.UsernameLbl.Size = new System.Drawing.Size(119, 32);
             this.UsernameLbl.TabIndex = 2;
             this.UsernameLbl.Text = "Username";
-           // this.UsernameLbl.Click += new System.EventHandler(this.label1_Click);
             // 
             // PasswordLbl
             // 
             this.PasswordLbl.AutoSize = true;
-            this.PasswordLbl.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.PasswordLbl.Font = new System.Drawing.Font("Simple Handmade", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.PasswordLbl.ForeColor = System.Drawing.Color.White;
-            this.PasswordLbl.Location = new System.Drawing.Point(21, 169);
+            this.PasswordLbl.Location = new System.Drawing.Point(21, 165);
             this.PasswordLbl.Name = "PasswordLbl";
-            this.PasswordLbl.Size = new System.Drawing.Size(122, 25);
+            this.PasswordLbl.Size = new System.Drawing.Size(118, 32);
             this.PasswordLbl.TabIndex = 3;
             this.PasswordLbl.Text = "Password";
             // 
@@ -155,15 +152,26 @@
             this.BackgroundPanel.Name = "BackgroundPanel";
             this.BackgroundPanel.Size = new System.Drawing.Size(451, 484);
             this.BackgroundPanel.TabIndex = 12;
-          //  this.BackgroundPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.BackgroundPanel_Paint);
+            // 
+            // RememberCheckBox
+            // 
+            this.RememberCheckBox.AutoSize = true;
+            this.RememberCheckBox.Font = new System.Drawing.Font("Simple Handmade", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.RememberCheckBox.ForeColor = System.Drawing.Color.White;
+            this.RememberCheckBox.Location = new System.Drawing.Point(25, 232);
+            this.RememberCheckBox.Name = "RememberCheckBox";
+            this.RememberCheckBox.Size = new System.Drawing.Size(120, 23);
+            this.RememberCheckBox.TabIndex = 13;
+            this.RememberCheckBox.Text = "Remember me";
+            this.RememberCheckBox.UseVisualStyleBackColor = true;
             // 
             // ForPasslbl
             // 
             this.ForPasslbl.AutoSize = true;
-            this.ForPasslbl.Font = new System.Drawing.Font("Verdana", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ForPasslbl.Location = new System.Drawing.Point(172, 233);
+            this.ForPasslbl.Font = new System.Drawing.Font("Simple Handmade", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ForPasslbl.Location = new System.Drawing.Point(174, 233);
             this.ForPasslbl.Name = "ForPasslbl";
-            this.ForPasslbl.Size = new System.Drawing.Size(124, 16);
+            this.ForPasslbl.Size = new System.Drawing.Size(129, 20);
             this.ForPasslbl.TabIndex = 12;
             this.ForPasslbl.TabStop = true;
             this.ForPasslbl.Text = "Forgot Password?";
@@ -237,18 +245,6 @@
             this.LogoPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.LogoPicture.TabIndex = 11;
             this.LogoPicture.TabStop = false;
-            // 
-            // RememberCheckBox
-            // 
-            this.RememberCheckBox.AutoSize = true;
-            this.RememberCheckBox.Font = new System.Drawing.Font("Verdana", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.RememberCheckBox.ForeColor = System.Drawing.Color.White;
-            this.RememberCheckBox.Location = new System.Drawing.Point(25, 232);
-            this.RememberCheckBox.Name = "RememberCheckBox";
-            this.RememberCheckBox.Size = new System.Drawing.Size(120, 20);
-            this.RememberCheckBox.TabIndex = 13;
-            this.RememberCheckBox.Text = "Remember me";
-            this.RememberCheckBox.UseVisualStyleBackColor = true;
             // 
             // LoginForm
             // 
