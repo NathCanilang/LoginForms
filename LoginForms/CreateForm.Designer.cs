@@ -45,7 +45,7 @@
             // UsernameBox
             // 
             this.UsernameBox.Font = new System.Drawing.Font("Simple Handmade", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.UsernameBox.Location = new System.Drawing.Point(145, 270);
+            this.UsernameBox.Location = new System.Drawing.Point(145, 220);
             this.UsernameBox.Multiline = true;
             this.UsernameBox.Name = "UsernameBox";
             this.UsernameBox.Size = new System.Drawing.Size(245, 44);
@@ -55,7 +55,7 @@
             // PasswordBox
             // 
             this.PasswordBox.Font = new System.Drawing.Font("Simple Handmade", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.PasswordBox.Location = new System.Drawing.Point(145, 321);
+            this.PasswordBox.Location = new System.Drawing.Point(145, 270);
             this.PasswordBox.Multiline = true;
             this.PasswordBox.Name = "PasswordBox";
             this.PasswordBox.Size = new System.Drawing.Size(245, 44);
@@ -117,7 +117,7 @@
             // MPINBox
             // 
             this.MPINBox.Font = new System.Drawing.Font("Simple Handmade", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.MPINBox.Location = new System.Drawing.Point(145, 220);
+            this.MPINBox.Location = new System.Drawing.Point(145, 321);
             this.MPINBox.Multiline = true;
             this.MPINBox.Name = "MPINBox";
             this.MPINBox.Size = new System.Drawing.Size(245, 44);

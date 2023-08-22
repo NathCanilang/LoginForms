@@ -37,6 +37,9 @@ namespace LoginForms
         object lockObject = new object();
         bool cooldownActive = false;
 
+        private int consecutiveFailures = 0;
+
+
         public LoginForm()
         {
             InitializeComponent();
@@ -44,7 +47,9 @@ namespace LoginForms
             
             cooldownTimer = new System.Windows.Forms.Timer();
             cooldownTimer.Interval = 10000; 
-            cooldownTimer.Tick += CooldownTimer_Tick; 
+            cooldownTimer.Tick += CooldownTimer_Tick;
+
+            consecutiveFailures = 0;
 
         }
 
@@ -102,6 +107,7 @@ namespace LoginForms
                         nextForm.ShowDialog();
                         this.WindowState = FormWindowState.Normal;
 
+                        consecutiveFailures = 0;
                         return;
                     }
                     break;
@@ -118,6 +124,7 @@ namespace LoginForms
                     missform.Show();
                     this.WindowState = FormWindowState.Normal;
 
+                    consecutiveFailures = 0;
                     return;
                 }
                 else
@@ -128,37 +135,38 @@ namespace LoginForms
                 return;
             }
 
-                 if (!usernameCorrect && !passwordCorrect)
-                {
-                    MessageBox.Show("Invalid Username and Password.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    AttemptFailure();
-                    return;
-                }
-               else if (!usernameCorrect)
-                {
-                    MessageBox.Show("Invalid Credentials.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    AttemptFailure();
-                    return;
-                }
-                else if (!passwordCorrect)
-                {
-                    MessageBox.Show("Invalid Password.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    AttemptFailure();
-                    return;
-                }     
+            if (!usernameCorrect && !passwordCorrect)
+            {
+                MessageBox.Show("Invalid Username and Password.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                AttemptFailure();
+                return;
+            }
+            else if (!usernameCorrect)
+            {
+                MessageBox.Show("Invalid Credentials.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                AttemptFailure();
+                return;
+            }
+            else if (!passwordCorrect)
+            {
+                MessageBox.Show("Invalid Password.", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                AttemptFailure();
+                return;
+            }
         }
 
         private void AttemptFailure()
         {
             lock (lockObject)
             {
-                attempts--;
-                if (attempts > 0)
+                consecutiveFailures++;
+                if (consecutiveFailures < 3)
                 {
-                    MessageBox.Show($"Access Denied! Try again. {attempts} {(attempts > 1 ? "attempts" : "attempt")} remaining.", "Attention", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show($"Access Denied! Try again. {3 - consecutiveFailures} {(3 - consecutiveFailures > 1 ? "attempts" : "attempt")} remaining.", "Attention", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
                 else
                 {
+                    consecutiveFailures = 0;
                     MessageBox.Show("No more attempts remaining. 10 Seoconds Cooldown activated.", "Attention", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     StartCooldownTimer();
                 }
@@ -175,6 +183,9 @@ namespace LoginForms
         {
             cooldownActive = false;
             cooldownTimer.Stop();
+
+            consecutiveFailures = 0;
+
             attempts = 3; 
             MessageBox.Show("Cooldown period ended. You can try again now.", "Attention", MessageBoxButtons.OK, MessageBoxIcon.Information);  
         }
